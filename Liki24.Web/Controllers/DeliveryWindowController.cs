@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Domain;
-using Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Liki24.Web.Controllers
@@ -12,31 +9,10 @@ namespace Liki24.Web.Controllers
     [ApiController]
     public class DeliveryWindowController : ControllerBase
     {
-        Liki24Context dbContext;
-
-        public DeliveryWindowController(Liki24Context dbContext)
-        {
-            this.dbContext = dbContext;
-        }
-
         [HttpGet("available-windows")]
         public async Task<IEnumerable<DeliveryWindowDto>> Get(DateTime currentDate, int horizon)
         {
             return null;
-        }
-
-        [HttpGet("get-all-settings")]
-        public IEnumerable<DeliveryWindow> GetSettings()
-        {
-            if (!dbContext.DeliveryWindows.Any())
-            {
-                foreach  (var w in Seed.GetDeliveryWindows())
-                    dbContext.DeliveryWindows.Add(w);
-
-                dbContext.SaveChanges();
-            }
-
-            return dbContext.DeliveryWindows;
         }
     }
 
